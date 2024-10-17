@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { FormEvent, useRef, useState } from 'react';
+import './App.css';
+import { Paper, Stack } from '@mui/material';
+import { TodoInput } from './components/TodoInput.tsx';
+import { TodoList } from './components/TodoList.tsx';
+import { Todo } from './types/todo.ts';
 
-function App() {
-  const [count, setCount] = useState(0)
+function findMaxId(todos: Todo[]) {
+	let maxId = 0;
+	todos.forEach((todo) => {
+		if (todo.id > maxId) {
+			maxId = todo.id;
+		}
+	});
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	return maxId;
 }
 
-export default App
+function App() {
+	const inputRef = useRef<HTMLInputElement>(null);
+	const [todos, setTodos] = useState<Todo[]>([]);
+
+	const handleSubmit = (event: FormEvent) => {
+		event.preventDefault();
+		if (inputRef.current?.value) {
+			console.log(todos);
+			const newTodo: Todo = {
+				id: findMaxId(todos) + 1,
+				description: inputRef.current.value,
+				active: true,
+			};
+
+			setTodos(todos.concat([newTodo]));
+			inputRef.current.value = '';
+		}
+	};
+
+	return (
+		<Paper sx={{ p: '20px', minWidth: '500px', minHeight: '600px' }} elevation={2}>
+			<Stack>
+				<TodoInput ref={inputRef} handleSubmit={handleSubmit} />
+				<TodoList todoList={todos} />
+			</Stack>
+		</Paper>
+	);
+}
+
+export default App;
