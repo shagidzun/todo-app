@@ -128,9 +128,20 @@ function App() {
 
 	return (
 		<>
-			<Paper sx={{ display: 'flex', p: '20px', minWidth: '500px', minHeight: '600px' }} elevation={2}>
+			<Paper
+				sx={{
+					display: 'flex',
+					px: '20px',
+					pt: '20px',
+					width: { md: '768px', sm: '576px', xs: '400px' },
+					height: '700px',
+					overflowY: 'scroll',
+					position: 'relative',
+				}}
+				elevation={2}
+			>
 				<Stack width="100%">
-					<TodoInput ref={inputRef} handleSubmit={handleSubmit} />
+					<TodoInput inputRef={inputRef} handleSubmit={handleSubmit} />
 					<TodoList
 						todoList={filteredTodos}
 						handleClick={handleCheckTodo}

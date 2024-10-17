@@ -14,19 +14,26 @@ interface TodoItemProps {
 
 export const TodoItem = ({ todo, handleClick, handleEdit, handleDelete }: TodoItemProps) => {
 	return (
-		<Stack direction="row" sx={{ '&:hover .MuiToolbar-root': { display: 'flex' }, height: '56px' }}>
+		<Stack direction="row" sx={{ '&:hover .MuiToolbar-root': { opacity: 1 }, minHeight: '56px', textAlign: 'left' }}>
 			<Button onClick={handleClick} size="small">
-				{todo.active ? <UncheckedCircle /> : <CheckedCircle />}
+				{todo.active ? <UncheckedCircle /> : <CheckedCircle color="success" />}
 			</Button>
-			<Typography sx={{ textDecoration: todo.active ? 'none' : 'line-through', my: 'auto', wordBreak: 'break-all' }}>
+			<Typography
+				sx={{
+					textDecoration: todo.active ? 'none' : 'line-through',
+					my: 'auto',
+					wordBreak: 'break-all',
+					opacity: todo.active ? 1 : 0.66,
+				}}
+			>
 				{todo.description}
 			</Typography>
-			<Toolbar sx={{ ml: 'auto', display: 'none' }}>
-				<Button size="small" onClick={handleEdit.bind(null, todo)}>
+			<Toolbar sx={{ ml: 'auto', opacity: 0, gap: '4px' }}>
+				<Button size="small" onClick={handleEdit.bind(null, todo)} sx={{ minWidth: '12px' }}>
 					<EditIcon />
 				</Button>
-				<Button size="small">
-					<DeleteIcon onClick={handleDelete.bind(null, todo)} />
+				<Button size="small" onClick={handleDelete.bind(null, todo)} sx={{ minWidth: '12px' }}>
+					<DeleteIcon />
 				</Button>
 			</Toolbar>
 		</Stack>

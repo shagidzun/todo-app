@@ -21,9 +21,9 @@ export const Tools = ({
 	filter,
 }: ToolsProps) => {
 	return (
-		<Stack mt="auto">
+		<Stack mt="auto" position="sticky" bottom={0} right={0} bgcolor="white" pb="20px">
 			<Divider />
-			<Stack direction="row" mt="10px" justifyContent="space-between">
+			<Stack direction="row" mt="20px" justifyContent="space-between">
 				<Typography my="auto" variant="body1">
 					{items} todo{items === 1 ? '' : 's'} left
 				</Typography>
