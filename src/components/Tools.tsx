@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Divider, Stack, Typography } from '@mui/material';
-import { Filter } from '../types/types.ts';
+import { Filter } from '../types';
 
 interface ToolsProps {
 	items: number;

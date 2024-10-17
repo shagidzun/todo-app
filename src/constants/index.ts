@@ -1,3 +1,3 @@
-import { Todo } from '../types/types.ts';
+import { Todo } from '../types';
 
 export const lsTodos: Todo[] = JSON.parse(localStorage.getItem('todos') ?? '[]');

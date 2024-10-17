@@ -3,7 +3,7 @@ import CheckedCircle from '@mui/icons-material/CheckCircleOutline';
 import UncheckedCircle from '@mui/icons-material/RadioButtonUnchecked';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Todo } from '../types/types.ts';
+import { Todo } from '../types';
 import { todoItemStyles } from './TodoItem.styles.ts';
 
 interface TodoItemProps {

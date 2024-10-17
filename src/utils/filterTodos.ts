@@ -1,4 +1,4 @@
-import { Filter, Todo } from '../types/types.ts';
+import { Filter, Todo } from '../types';
 
 export function filterTodos(todos: Todo[], filter: Filter) {
 	switch (filter) {

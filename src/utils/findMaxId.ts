@@ -1,4 +1,4 @@
-import { Todo } from '../types/types.ts';
+import { Todo } from '../types';
 
 export function findMaxId(todos: Todo[]) {
 	let maxId = 0;

@@ -1,14 +1,10 @@
 import { FormEvent, useRef, useState } from 'react';
 import './App.css';
 import { Paper, Stack, Typography } from '@mui/material';
-import { TodoInput } from './components/TodoInput.tsx';
-import { TodoList } from './components/TodoList.tsx';
-import { Filter, Todo } from './types/types.ts';
-import { Tools } from './components/Tools.tsx';
-import { lsTodos } from './constants/constants.ts';
-import { EditTodo } from './components/EditTodo.tsx';
-import { filterTodos } from './utils/filterTodos.ts';
-import { findMaxId } from './utils/findMaxId.ts';
+import { EditTodo, TodoInput, TodoList, Tools } from './components';
+import { Filter, Todo } from './types';
+import { lsTodos } from './constants';
+import { filterTodos, findMaxId } from './utils';
 import { appStyles } from './App.styles.ts';
 
 function App() {

@@ -1,4 +1,4 @@
-import { Styles } from './types/types.ts';
+import { Styles } from './types';
 
 export const appStyles = {
 	title: {

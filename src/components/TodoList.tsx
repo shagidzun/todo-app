@@ -1,4 +1,4 @@
-import { Todo } from '../types/types.ts';
+import { Todo } from '../types';
 import { Divider, Stack, Typography } from '@mui/material';
 import { TodoItem } from './TodoItem.tsx';
 import { Fragment } from 'react';
