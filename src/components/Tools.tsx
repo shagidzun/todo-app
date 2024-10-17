@@ -25,7 +25,7 @@ export const Tools = ({
 			<Divider />
 			<Stack direction="row" mt="10px" justifyContent="space-between">
 				<Typography my="auto" variant="body1">
-					{items} todos left
+					{items} todo{items === 1 ? '' : 's'} left
 				</Typography>
 				<Stack alignItems="center">
 					<ButtonGroup size="small">

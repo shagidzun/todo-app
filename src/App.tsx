@@ -74,9 +74,14 @@ function App() {
 		setFilter('completed');
 	};
 
-	const handleClearCompleted = () => {};
+	const handleClearCompleted = () => {
+		const newTodos = todos.filter((todo) => todo.active);
+		setTodos(newTodos);
+	};
 
-	const handleClearAll = () => {};
+	const handleClearAll = () => {
+		setTodos([]);
+	};
 
 	return (
 		<Paper sx={{ display: 'flex', p: '20px', minWidth: '500px', minHeight: '600px' }} elevation={2}>
