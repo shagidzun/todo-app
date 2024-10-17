@@ -6,15 +6,22 @@ import { Fragment } from 'react';
 interface TodoListProps {
 	todoList: Todo[];
 	handleClick: (id: number) => void;
+	handleEdit: (todo: Todo) => void;
+	handleDelete: (todo: Todo) => void;
 }
 
-export const TodoList = ({ todoList, handleClick }: TodoListProps) => {
+export const TodoList = ({ todoList, handleClick, handleEdit, handleDelete }: TodoListProps) => {
 	return (
 		<Stack>
 			{todoList.map((todo) => (
 				<Fragment key={todo.id}>
 					<Divider />
-					<TodoItem description={todo.description} active={todo.active} handleClick={handleClick.bind(null, todo.id)} />
+					<TodoItem
+						todo={todo}
+						handleClick={handleClick.bind(null, todo.id)}
+						handleEdit={handleEdit}
+						handleDelete={handleDelete}
+					/>
 				</Fragment>
 			))}
 		</Stack>

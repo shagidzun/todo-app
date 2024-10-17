@@ -6,6 +6,7 @@ import { TodoList } from './components/TodoList.tsx';
 import { Filter, Todo } from './types/types.ts';
 import { Tools } from './components/Tools.tsx';
 import { lsTodos } from './constants/constants.ts';
+import { EditTodo } from './components/EditTodo.tsx';
 
 function findMaxId(todos: Todo[]) {
 	let maxId = 0;
@@ -31,8 +32,11 @@ function filterTodos(todos: Todo[], filter: Filter) {
 
 function App() {
 	const inputRef = useRef<HTMLInputElement>(null);
+	const descriptionRef = useRef<HTMLInputElement>(null);
+	const currentTodo = useRef<Todo>();
 	const [todos, setTodos] = useState<Todo[]>(lsTodos);
 	const [filter, setFilter] = useState<Filter>('all');
+	const [isOpen, setIsOpen] = useState(false);
 
 	const activeTodosCount = useMemo(() => todos.filter((todo) => todo.active).length, [todos]);
 
@@ -91,22 +95,67 @@ function App() {
 		localStorage.removeItem('todos');
 	};
 
+	const handleClose = () => {
+		setIsOpen(false);
+	};
+
+	const handleSave = () => {
+		if (currentTodo.current && descriptionRef.current?.value) {
+			const { id, active } = currentTodo.current;
+			const editedTodo: Todo = {
+				id,
+				description: descriptionRef.current.value,
+				active,
+			};
+
+			const newTodos = todos.map((todo) => (todo.id === id ? editedTodo : todo));
+			setTodos(newTodos);
+			localStorage.setItem('todos', JSON.stringify(newTodos));
+			setIsOpen(false);
+		}
+	};
+
+	const handleEdit = (todo: Todo) => {
+		currentTodo.current = todo;
+		setIsOpen(true);
+	};
+
+	const handleDelete = (todo: Todo) => {
+		const newTodos = todos.filter((item) => item.id !== todo.id);
+		setTodos(newTodos);
+		localStorage.setItem('todos', JSON.stringify(newTodos));
+	};
+
 	return (
-		<Paper sx={{ display: 'flex', p: '20px', minWidth: '500px', minHeight: '600px' }} elevation={2}>
-			<Stack width="100%">
-				<TodoInput ref={inputRef} handleSubmit={handleSubmit} />
-				<TodoList todoList={filteredTodos} handleClick={handleCheckTodo} />
-				<Tools
-					filter={filter}
-					items={activeTodosCount}
-					handleFilterAll={handleFilterAll}
-					handleFilterActive={handleFilterActive}
-					handleFilterCompleted={handleFilterCompleted}
-					handleClearCompleted={handleClearCompleted}
-					handleClearAll={handleClearAll}
-				/>
-			</Stack>
-		</Paper>
+		<>
+			<Paper sx={{ display: 'flex', p: '20px', minWidth: '500px', minHeight: '600px' }} elevation={2}>
+				<Stack width="100%">
+					<TodoInput ref={inputRef} handleSubmit={handleSubmit} />
+					<TodoList
+						todoList={filteredTodos}
+						handleClick={handleCheckTodo}
+						handleEdit={handleEdit}
+						handleDelete={handleDelete}
+					/>
+					<Tools
+						filter={filter}
+						items={activeTodosCount}
+						handleFilterAll={handleFilterAll}
+						handleFilterActive={handleFilterActive}
+						handleFilterCompleted={handleFilterCompleted}
+						handleClearCompleted={handleClearCompleted}
+						handleClearAll={handleClearAll}
+					/>
+				</Stack>
+			</Paper>
+			<EditTodo
+				isOpen={isOpen}
+				onClose={handleClose}
+				onSave={handleSave}
+				description={currentTodo.current?.description ?? ''}
+				descriptionRef={descriptionRef}
+			/>
+		</>
 	);
 }
 
