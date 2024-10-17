@@ -3,10 +3,10 @@ import './App.css';
 import { Paper, Stack } from '@mui/material';
 import { TodoInput } from './components/TodoInput.tsx';
 import { TodoList } from './components/TodoList.tsx';
-import { Filter, Types } from './types/types.ts';
+import { Filter, Todo } from './types/types.ts';
 import { Tools } from './components/Tools.tsx';
 
-function findMaxId(todos: Types[]) {
+function findMaxId(todos: Todo[]) {
 	let maxId = 0;
 	todos.forEach((todo) => {
 		if (todo.id > maxId) {
@@ -17,7 +17,7 @@ function findMaxId(todos: Types[]) {
 	return maxId;
 }
 
-function filterTodos(todos: Types[], filter: Filter) {
+function filterTodos(todos: Todo[], filter: Filter) {
 	switch (filter) {
 		case 'all':
 			return todos;
@@ -30,7 +30,7 @@ function filterTodos(todos: Types[], filter: Filter) {
 
 function App() {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [todos, setTodos] = useState<Types[]>([]);
+	const [todos, setTodos] = useState<Todo[]>([]);
 	const [filter, setFilter] = useState<Filter>('all');
 
 	const activeTodosCount = useMemo(() => todos.filter((todo) => todo.active).length, [todos]);
@@ -40,7 +40,7 @@ function App() {
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
 		if (inputRef.current?.value) {
-			const newTodo: Types = {
+			const newTodo: Todo = {
 				id: findMaxId(todos) + 1,
 				description: inputRef.current.value,
 				active: true,
@@ -54,7 +54,7 @@ function App() {
 	const handleCheckTodo = (id: number) => {
 		const targetTodo = todos.find((todo) => todo.id === id);
 		if (targetTodo) {
-			const updatedTodo: Types = {
+			const updatedTodo: Todo = {
 				...targetTodo,
 				active: !targetTodo.active,
 			};

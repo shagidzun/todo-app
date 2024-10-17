@@ -1,10 +1,10 @@
-import { Types } from '../types/types.ts';
+import { Todo } from '../types/types.ts';
 import { Divider, Stack } from '@mui/material';
 import { TodoItem } from './TodoItem.tsx';
 import { Fragment } from 'react';
 
 interface TodoListProps {
-	todoList: Types[];
+	todoList: Todo[];
 	handleClick: (id: number) => void;
 }
 
