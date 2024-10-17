@@ -1,6 +1,6 @@
-import { FormEvent, useMemo, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import './App.css';
-import { Paper, Stack } from '@mui/material';
+import { Paper, Stack, Typography } from '@mui/material';
 import { TodoInput } from './components/TodoInput.tsx';
 import { TodoList } from './components/TodoList.tsx';
 import { Filter, Todo } from './types/types.ts';
@@ -19,9 +19,9 @@ function App() {
 	const [filter, setFilter] = useState<Filter>('all');
 	const [isOpen, setIsOpen] = useState(false);
 
-	const activeTodosCount = useMemo(() => todos.filter((todo) => todo.active).length, [todos]);
+	const activeTodosCount = todos.filter((todo) => todo.active).length;
 
-	const filteredTodos = useMemo(() => filterTodos(todos, filter), [todos, filter]);
+	const filteredTodos = filterTodos(todos, filter);
 
 	const handleSubmit = (event: FormEvent) => {
 		event.preventDefault();
@@ -97,7 +97,10 @@ function App() {
 
 	return (
 		<>
-			<Paper sx={appStyles.paper} elevation={2}>
+			<Typography variant="h1" sx={appStyles.title}>
+				todos
+			</Typography>
+			<Paper sx={appStyles.paper} elevation={5}>
 				<Stack width="100%">
 					<TodoInput inputRef={inputRef} handleSubmit={handleSubmit} />
 					<TodoList

@@ -1,5 +1,5 @@
 import { Todo } from '../types/types.ts';
-import { Divider, Stack } from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 import { TodoItem } from './TodoItem.tsx';
 import { Fragment } from 'react';
 
@@ -11,7 +11,7 @@ interface TodoListProps {
 }
 
 export const TodoList = ({ todoList, handleClick, handleEdit, handleDelete }: TodoListProps) => {
-	return (
+	return todoList.length > 0 ? (
 		<Stack>
 			{todoList.map((todo) => (
 				<Fragment key={todo.id}>
@@ -25,5 +25,7 @@ export const TodoList = ({ todoList, handleClick, handleEdit, handleDelete }: To
 				</Fragment>
 			))}
 		</Stack>
+	) : (
+		<Typography variant="h5">No todos</Typography>
 	);
 };
