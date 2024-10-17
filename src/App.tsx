@@ -5,6 +5,7 @@ import { TodoInput } from './components/TodoInput.tsx';
 import { TodoList } from './components/TodoList.tsx';
 import { Filter, Todo } from './types/types.ts';
 import { Tools } from './components/Tools.tsx';
+import { lsTodos } from './constants/constants.ts';
 
 function findMaxId(todos: Todo[]) {
 	let maxId = 0;
@@ -30,7 +31,7 @@ function filterTodos(todos: Todo[], filter: Filter) {
 
 function App() {
 	const inputRef = useRef<HTMLInputElement>(null);
-	const [todos, setTodos] = useState<Todo[]>([]);
+	const [todos, setTodos] = useState<Todo[]>(lsTodos);
 	const [filter, setFilter] = useState<Filter>('all');
 
 	const activeTodosCount = useMemo(() => todos.filter((todo) => todo.active).length, [todos]);
@@ -46,7 +47,9 @@ function App() {
 				active: true,
 			};
 
-			setTodos(todos.concat([newTodo]));
+			const newTodos = todos.concat([newTodo]);
+			setTodos(newTodos);
+			localStorage.setItem('todos', JSON.stringify(newTodos));
 			inputRef.current.value = '';
 		}
 	};
@@ -58,7 +61,10 @@ function App() {
 				...targetTodo,
 				active: !targetTodo.active,
 			};
-			setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
+
+			const newTodos = todos.map((todo) => (todo.id === id ? updatedTodo : todo));
+			setTodos(newTodos);
+			localStorage.setItem('todos', JSON.stringify(newTodos));
 		}
 	};
 
@@ -77,10 +83,12 @@ function App() {
 	const handleClearCompleted = () => {
 		const newTodos = todos.filter((todo) => todo.active);
 		setTodos(newTodos);
+		localStorage.setItem('todos', JSON.stringify(newTodos));
 	};
 
 	const handleClearAll = () => {
 		setTodos([]);
+		localStorage.removeItem('todos');
 	};
 
 	return (
