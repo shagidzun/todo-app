@@ -7,28 +7,9 @@ import { Filter, Todo } from './types/types.ts';
 import { Tools } from './components/Tools.tsx';
 import { lsTodos } from './constants/constants.ts';
 import { EditTodo } from './components/EditTodo.tsx';
-
-function findMaxId(todos: Todo[]) {
-	let maxId = 0;
-	todos.forEach((todo) => {
-		if (todo.id > maxId) {
-			maxId = todo.id;
-		}
-	});
-
-	return maxId;
-}
-
-function filterTodos(todos: Todo[], filter: Filter) {
-	switch (filter) {
-		case 'all':
-			return todos;
-		case 'active':
-			return todos.filter((todo) => todo.active);
-		case 'completed':
-			return todos.filter((todo) => !todo.active);
-	}
-}
+import { filterTodos } from './utils/filterTodos.ts';
+import { findMaxId } from './utils/findMaxId.ts';
+import { appStyles } from './App.styles.ts';
 
 function App() {
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -70,18 +51,6 @@ function App() {
 			setTodos(newTodos);
 			localStorage.setItem('todos', JSON.stringify(newTodos));
 		}
-	};
-
-	const handleFilterAll = () => {
-		setFilter('all');
-	};
-
-	const handleFilterActive = () => {
-		setFilter('active');
-	};
-
-	const handleFilterCompleted = () => {
-		setFilter('completed');
 	};
 
 	const handleClearCompleted = () => {
@@ -128,18 +97,7 @@ function App() {
 
 	return (
 		<>
-			<Paper
-				sx={{
-					display: 'flex',
-					px: '20px',
-					pt: '20px',
-					width: { md: '768px', sm: '576px', xs: '400px' },
-					height: '700px',
-					overflowY: 'scroll',
-					position: 'relative',
-				}}
-				elevation={2}
-			>
+			<Paper sx={appStyles.paper} elevation={2}>
 				<Stack width="100%">
 					<TodoInput inputRef={inputRef} handleSubmit={handleSubmit} />
 					<TodoList
@@ -151,9 +109,9 @@ function App() {
 					<Tools
 						filter={filter}
 						items={activeTodosCount}
-						handleFilterAll={handleFilterAll}
-						handleFilterActive={handleFilterActive}
-						handleFilterCompleted={handleFilterCompleted}
+						handleFilterAll={() => setFilter('all')}
+						handleFilterActive={() => setFilter('active')}
+						handleFilterCompleted={() => setFilter('completed')}
 						handleClearCompleted={handleClearCompleted}
 						handleClearAll={handleClearAll}
 					/>

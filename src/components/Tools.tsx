@@ -27,7 +27,7 @@ export const Tools = ({
 				<Typography my="auto" variant="body1">
 					{items} todo{items === 1 ? '' : 's'} left
 				</Typography>
-				<Stack alignItems="center">
+				<Stack alignItems="center" gap="10px">
 					<ButtonGroup size="small">
 						<Button variant={filter === 'all' ? 'contained' : 'outlined'} onClick={handleFilterAll}>
 							All
@@ -39,7 +39,7 @@ export const Tools = ({
 							Completed
 						</Button>
 					</ButtonGroup>
-					<ButtonGroup size="small" sx={{ mt: '10px' }}>
+					<ButtonGroup size="small">
 						<Button onClick={handleClearCompleted}>Clear completed</Button>
 						<Button onClick={handleClearAll}>Clear all</Button>
 					</ButtonGroup>

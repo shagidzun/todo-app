@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogTitle, Paper, Stack, TextField } from '@mui/material';
 import { Ref } from 'react';
+import { editTodoStyles } from './EditTodo.styles.ts';
 
 export function EditTodo({
 	isOpen,
@@ -20,10 +21,10 @@ export function EditTodo({
 			onClose={onClose}
 			transitionDuration={0}
 			disableScrollLock
-			PaperProps={{ sx: { width: '100%', maxWidth: 738 } }}
+			PaperProps={editTodoStyles.dialogPaper}
 		>
 			<DialogTitle>Edit todo</DialogTitle>
-			<Paper sx={{ p: '20px' }} elevation={2}>
+			<Paper sx={editTodoStyles.paper} elevation={2}>
 				<Stack alignItems="center" gap="24px" width="100%">
 					<TextField required inputRef={descriptionRef} label="Todo" fullWidth defaultValue={description} />
 					<Stack direction="row" gap="10px">

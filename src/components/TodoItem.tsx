@@ -4,6 +4,7 @@ import UncheckedCircle from '@mui/icons-material/RadioButtonUnchecked';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Todo } from '../types/types.ts';
+import { todoItemStyles } from './TodoItem.styles.ts';
 
 interface TodoItemProps {
 	todo: Todo;
@@ -14,25 +15,16 @@ interface TodoItemProps {
 
 export const TodoItem = ({ todo, handleClick, handleEdit, handleDelete }: TodoItemProps) => {
 	return (
-		<Stack direction="row" sx={{ '&:hover .MuiToolbar-root': { opacity: 1 }, minHeight: '56px', textAlign: 'left' }}>
+		<Stack direction="row" sx={todoItemStyles.container}>
 			<Button onClick={handleClick} size="small">
 				{todo.active ? <UncheckedCircle /> : <CheckedCircle color="success" />}
 			</Button>
-			<Typography
-				sx={{
-					textDecoration: todo.active ? 'none' : 'line-through',
-					my: 'auto',
-					wordBreak: 'break-all',
-					opacity: todo.active ? 1 : 0.66,
-				}}
-			>
-				{todo.description}
-			</Typography>
-			<Toolbar sx={{ ml: 'auto', opacity: 0, gap: '4px' }}>
-				<Button size="small" onClick={handleEdit.bind(null, todo)} sx={{ minWidth: '12px' }}>
+			<Typography sx={todoItemStyles.description(todo)}>{todo.description}</Typography>
+			<Toolbar sx={todoItemStyles.toolbar}>
+				<Button size="small" onClick={handleEdit.bind(null, todo)} sx={todoItemStyles.btn}>
 					<EditIcon />
 				</Button>
-				<Button size="small" onClick={handleDelete.bind(null, todo)} sx={{ minWidth: '12px' }}>
+				<Button size="small" onClick={handleDelete.bind(null, todo)} sx={todoItemStyles.btn}>
 					<DeleteIcon />
 				</Button>
 			</Toolbar>
