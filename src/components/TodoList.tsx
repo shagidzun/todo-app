@@ -1,4 +1,4 @@
-import { Todo } from '../types';
+import { Filter, Todo } from '../types';
 import { Divider, Stack, Typography } from '@mui/material';
 import { TodoItem } from './TodoItem.tsx';
 import { Fragment } from 'react';
@@ -8,9 +8,10 @@ interface TodoListProps {
 	handleClick: (id: number) => void;
 	handleEdit: (todo: Todo) => void;
 	handleDelete: (todo: Todo) => void;
+	filter: Filter;
 }
 
-export const TodoList = ({ todoList, handleClick, handleEdit, handleDelete }: TodoListProps) => {
+export const TodoList = ({ todoList, handleClick, handleEdit, handleDelete, filter }: TodoListProps) => {
 	return todoList.length > 0 ? (
 		<Stack>
 			{todoList.map((todo) => (
@@ -26,6 +27,8 @@ export const TodoList = ({ todoList, handleClick, handleEdit, handleDelete }: To
 			))}
 		</Stack>
 	) : (
-		<Typography variant="h5">No todos</Typography>
+		<Typography variant="h5">
+			No{filter === 'active' ? ' active' : filter === 'completed' ? ' completed' : ''} todos
+		</Typography>
 	);
 };

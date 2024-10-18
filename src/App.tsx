@@ -104,6 +104,7 @@ function App() {
 						handleClick={handleCheckTodo}
 						handleEdit={handleEdit}
 						handleDelete={handleDelete}
+						filter={filter}
 					/>
 					<Tools
 						filter={filter}
