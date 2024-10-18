@@ -19,7 +19,9 @@ export const TodoItem = ({ todo, handleClick, handleEdit, handleDelete }: TodoIt
 			<Button onClick={handleClick} size="small">
 				{todo.active ? <UncheckedCircle /> : <CheckedCircle color="success" />}
 			</Button>
-			<Typography sx={todoItemStyles.description(todo)}>{todo.description}</Typography>
+			<Typography variant="h6" sx={todoItemStyles.description(todo)}>
+				{todo.description}
+			</Typography>
 			<Toolbar sx={todoItemStyles.toolbar}>
 				<Button size="small" onClick={handleEdit.bind(null, todo)} sx={todoItemStyles.btn}>
 					<EditIcon />

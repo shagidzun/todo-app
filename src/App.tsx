@@ -8,9 +8,9 @@ import { filterTodos, findMaxId } from './utils';
 import { appStyles } from './App.styles.ts';
 
 function App() {
-	const inputRef = useRef<HTMLInputElement>(null);
-	const descriptionRef = useRef<HTMLInputElement>(null);
-	const currentTodo = useRef<Todo>();
+	const inputRef = useRef<HTMLInputElement>(null); // input for new todos
+	const descriptionRef = useRef<HTMLInputElement>(null); // input for editing
+	const currentTodo = useRef<Todo>(); // data for autocomplete in modal
 	const [todos, setTodos] = useState<Todo[]>(lsTodos);
 	const [filter, setFilter] = useState<Filter>('all');
 	const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ function App() {
 
 	const filteredTodos = filterTodos(todos, filter);
 
-	const handleSubmit = (event: FormEvent) => {
+	const handleAddTodo = (event: FormEvent) => {
 		event.preventDefault();
 		if (inputRef.current?.value) {
 			const newTodo: Todo = {
@@ -98,7 +98,7 @@ function App() {
 			</Typography>
 			<Paper sx={appStyles.paper} elevation={5}>
 				<Stack width="100%">
-					<TodoInput inputRef={inputRef} handleSubmit={handleSubmit} />
+					<TodoInput inputRef={inputRef} handleSubmit={handleAddTodo} />
 					<TodoList
 						todoList={filteredTodos}
 						handleClick={handleCheckTodo}
