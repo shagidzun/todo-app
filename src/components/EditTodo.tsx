@@ -2,19 +2,15 @@ import { Button, Dialog, DialogTitle, Paper, Stack, TextField } from '@mui/mater
 import { Ref } from 'react';
 import { editTodoStyles } from './EditTodo.styles.ts';
 
-export function EditTodo({
-	isOpen,
-	onClose,
-	onSave,
-	description,
-	descriptionRef,
-}: {
+interface EditTodoProps {
 	isOpen: boolean;
 	onClose: VoidFunction;
 	onSave: VoidFunction;
 	description: string;
 	descriptionRef: Ref<HTMLInputElement>;
-}) {
+}
+
+export function EditTodo({ isOpen, onClose, onSave, description, descriptionRef }: EditTodoProps) {
 	return (
 		<Dialog
 			open={isOpen}
