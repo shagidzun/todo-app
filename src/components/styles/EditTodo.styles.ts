@@ -1,4 +1,4 @@
-import { Styles } from '../types';
+import { Styles } from '../../types';
 
 export const editTodoStyles = {
 	dialogPaper: {

@@ -1,4 +1,4 @@
-import { Styles, Todo } from '../types';
+import { Styles, Todo } from '../../types';
 
 export const todoItemStyles = {
 	container: {

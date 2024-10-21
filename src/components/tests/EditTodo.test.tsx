@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { EditTodo } from './EditTodo.tsx';
+import { EditTodo } from '../EditTodo.tsx';
 import { createRef } from 'react';
 
 const mockOnClose = jest.fn();

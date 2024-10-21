@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TodoInput } from './TodoInput.tsx';
+import { TodoInput } from '../TodoInput.tsx';
 import { createRef, FormEvent } from 'react';
 import userEvent from '@testing-library/user-event';
 

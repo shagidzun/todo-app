@@ -4,7 +4,7 @@ import UncheckedCircle from '@mui/icons-material/RadioButtonUnchecked';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Todo } from '../types';
-import { todoItemStyles } from './TodoItem.styles.ts';
+import { todoItemStyles } from './styles/TodoItem.styles.ts';
 
 interface TodoItemProps {
 	todo: Todo;

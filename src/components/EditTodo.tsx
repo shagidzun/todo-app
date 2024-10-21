@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogTitle, Paper, Stack, TextField } from '@mui/material';
 import { Ref } from 'react';
-import { editTodoStyles } from './EditTodo.styles.ts';
+import { editTodoStyles } from './styles/EditTodo.styles.ts';
 
 interface EditTodoProps {
 	isOpen: boolean;

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { TodoList } from './TodoList.tsx';
-import { mockAllTodos } from '../mocks';
+import { TodoList } from '../TodoList.tsx';
+import { mockAllTodos } from '../../mocks';
 
 const mockHandleClick = jest.fn();
 const mockHandleEdit = jest.fn();

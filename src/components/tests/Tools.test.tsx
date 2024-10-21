@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Tools } from './Tools.tsx';
+import { Tools } from '../Tools.tsx';
 
 const mockHandlers = {
 	All: jest.fn(),

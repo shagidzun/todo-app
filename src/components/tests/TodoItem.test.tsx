@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { TodoItem } from './TodoItem.tsx';
-import { mockActiveTodos, mockCompletedTodos } from '../mocks';
+import { TodoItem } from '../TodoItem.tsx';
+import { mockActiveTodos, mockCompletedTodos } from '../../mocks';
 
 const mockActiveTodo = mockActiveTodos[0];
 const mockCompletedTodo = mockCompletedTodos[0];

@@ -1,6 +1,6 @@
 import { Button, Stack, TextField } from '@mui/material';
 import { FormEvent, Ref } from 'react';
-import { todoInputStyles } from './TodoInput.styles.ts';
+import { todoInputStyles } from './styles/TodoInput.styles.ts';
 
 interface TodoInputProps {
 	handleSubmit: (event: FormEvent) => void;
