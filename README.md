@@ -13,13 +13,19 @@ Simple ToDo App with the following features:
 
 React, Material UI, Jest, React Testing Library
 
-### Available scripts
+### How to run this app locally
 
-- start: "vite",
-- build: "tsc -b && vite build",
-- lint: "eslint .",
-- preview: "vite preview",
-- test: "jest"
+To run this app locally, run the following command in your terminal:
+```
+npm i && npm run start
+```
+
+Then visit http://localhost:5173/
+
+To run tests, run the following command:
+```
+npm run test
+```
 
 ### Deployment link
 
