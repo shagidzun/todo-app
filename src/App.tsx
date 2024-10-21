@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import './App.css';
 import { Paper, Stack, Typography } from '@mui/material';
 import { EditTodo, TodoInput, TodoList, Tools } from './components';
@@ -15,6 +15,10 @@ function App() {
 	const [filter, setFilter] = useState<Filter>('all');
 	const [isOpen, setIsOpen] = useState(false);
 
+	useEffect(() => {
+		localStorage.setItem('todos', JSON.stringify(todos));
+	}, [todos]);
+
 	const activeTodosCount = todos.filter((todo) => todo.active).length;
 
 	const filteredTodos = filterTodos(todos, filter);
@@ -30,7 +34,6 @@ function App() {
 
 			const newTodos = todos.concat([newTodo]);
 			setTodos(newTodos);
-			localStorage.setItem('todos', JSON.stringify(newTodos));
 			inputRef.current.value = '';
 		}
 	};
@@ -45,19 +48,16 @@ function App() {
 
 			const newTodos = todos.map((todo) => (todo.id === id ? updatedTodo : todo));
 			setTodos(newTodos);
-			localStorage.setItem('todos', JSON.stringify(newTodos));
 		}
 	};
 
 	const handleClearCompleted = () => {
 		const newTodos = todos.filter((todo) => todo.active);
 		setTodos(newTodos);
-		localStorage.setItem('todos', JSON.stringify(newTodos));
 	};
 
 	const handleClearAll = () => {
 		setTodos([]);
-		localStorage.removeItem('todos');
 	};
 
 	const handleClose = () => {
